@@ -11,9 +11,9 @@ VERS=v1.1.383
 # Download RStudio source
 cd ~/Downloads/
 wget -O $VERS https://github.com/rstudio/rstudio/tarball/$VERS
-mkdir ~/Downloads/rstudio-$VERS
+sudo mkdir ~/Downloads/rstudio-$VERS
 tar xvf ~/Downloads/$VERS -C ~/Downloads/rstudio-$VERS --strip-components 1
-rm ~/Downloads/$VERS
+sudo rm ~/Downloads/$VERS
 
 # Run environment preparation scripts
 sudo apt-get install -y openjdk-7-jdk
@@ -37,18 +37,18 @@ cd ~/Downloads/rstudio-$VERS/dependencies/common/
 ./install-packages
 
 # Add pandoc folder to override build check
-mkdir ~/Downloads/rstudio-$VERS/dependencies/common/pandoc
+sudo mkdir ~/Downloads/rstudio-$VERS/dependencies/common/pandoc
 
 # Get Closure Compiler and replace compiler.jar
 cd ~/Downloads
 wget http://dl.google.com/closure-compiler/compiler-latest.zip
 unzip compiler-latest.zip
-rm COPYING README.md compiler-latest.zip
+sudo rm COPYING README.md compiler-latest.zip
 sudo mv closure-compiler*.jar ~/Downloads/rstudio-$VERS/src/gwt/tools/compiler/compiler.jar
 
 # Configure cmake and build RStudio
 cd ~/Downloads/rstudio-$VERS/
-mkdir build
+sudo mkdir build
 sudo cmake -DRSTUDIO_TARGET=Server -DCMAKE_BUILD_TYPE=Release
 sudo make install
 
